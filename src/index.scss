@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.error-message {
+  color: #f00;
+}
+
+.success-message {
+  color: #0f0;
+}
+
+.main-container {
+  margin: 50px;
+}
+
+.question-form {
+  margin: 15px;
+}
+
+.answer-form {
+  margin: 30px;
+}
+
+.add-answer-btn {
+  margin: 30px 10px;
+}
+
+.answer-form-btn {
+  margin: 10px 0 0 5px;
+}
+
+.question-form {
+  margin-top: 10px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.form-group .answer-form:last-child {
+  margin-bottom: 0;
+}
+
+.toggle-question-area {
+  width: 100%;
+}
+
+.question-edit-icons {
+  margin-left: 5px;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.collapse-element,
+.toolbar-actions {
+  font-size: 12px;
+}
+
+.toolbar-actions span {
+  margin-right: 5px;
+}
+
+.up-vote {
+  color: #0f0;
+}
+
+.down-vote {
+  color: #f00;
+}
+
+.vote-value {
+  padding: 0 5px;
+}
+
+.question,
+.answer {
+  font-size: 16px;
+}
+
+.question {
+  font-weight: bold;
+}
+
+.load-more-btn {
+  text-align: center;
+  margin: auto;
+  color: #797878
+}
+
+.notification-label,
+.load-more-label {
+  margin-right: 5px;
+}
+
+@import "node_modules/bootstrap/scss/bootstrap";
