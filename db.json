@@ -133,6 +133,28 @@
           },
           "createdAt": "2022-01-03T22:28:59.727Z",
           "id": 21
+        },
+        {
+          "text": "Newer answer",
+          "createdBy": {
+            "id": 8,
+            "firstName": "test1",
+            "lastName": "test1",
+            "email": "test@test.com"
+          },
+          "createdAt": "2022-01-03T22:43:52.014Z",
+          "id": 22
+        },
+        {
+          "text": "Newest answer",
+          "createdBy": {
+            "id": 8,
+            "firstName": "test1",
+            "lastName": "test1",
+            "email": "test@test.com"
+          },
+          "createdAt": "2022-01-03T22:45:02.575Z",
+          "id": 23
         }
       ],
       "id": 3,
@@ -583,6 +605,28 @@
       },
       "createdAt": "2022-01-03T22:28:59.727Z",
       "id": 21
+    },
+    {
+      "text": "Newer answer",
+      "createdBy": {
+        "id": 8,
+        "firstName": "test1",
+        "lastName": "test1",
+        "email": "test@test.com"
+      },
+      "createdAt": "2022-01-03T22:43:52.014Z",
+      "id": 22
+    },
+    {
+      "text": "Newest answer",
+      "createdBy": {
+        "id": 8,
+        "firstName": "test1",
+        "lastName": "test1",
+        "email": "test@test.com"
+      },
+      "createdAt": "2022-01-03T22:45:02.575Z",
+      "id": 23
     }
   ],
   "notifications": [
@@ -827,8 +871,274 @@
         "email": "test@test.com"
       },
       "createdAt": "2022-01-03T22:28:59.801Z",
-      "checked": false,
-      "id": 4
+      "checked": true,
+      "id": 4,
+      "checkedAt": "2022-01-03T22:43:08.240Z"
+    },
+    {
+      "text": "An answer for your question \"Will it rain??\" was posted.",
+      "question": {
+        "text": "Will it rain??",
+        "createdBy": {
+          "id": 8,
+          "firstName": "test1",
+          "lastName": "test1",
+          "email": "test@test.com"
+        },
+        "createdAt": "2022-01-02T17:08:51.198Z",
+        "answers": [
+          {
+            "text": "Maybe yes, maybe not.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T20:51:52.592Z",
+            "id": 16
+          },
+          {
+            "text": "Check the weather forecast.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T20:55:00.728Z",
+            "id": 17
+          },
+          {
+            "text": "Who knows.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T20:55:46.577Z",
+            "id": 18
+          },
+          {
+            "text": "Yes, it will.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T20:58:14.161Z",
+            "id": 19
+          },
+          {
+            "text": "It will.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T22:17:41.136Z",
+            "id": 20
+          },
+          {
+            "text": "New answer",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T22:28:59.727Z",
+            "id": 21
+          },
+          {
+            "text": "Newer answer",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T22:43:52.014Z",
+            "id": 22
+          }
+        ],
+        "id": 3,
+        "ratings": [
+          {
+            "upVote": true,
+            "downVote": false,
+            "user": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            }
+          }
+        ],
+        "modifiedAt": "2022-01-03T10:44:37.531Z",
+        "totalRating": 1
+      },
+      "answer": {
+        "text": "Newer answer",
+        "createdBy": {
+          "id": 8,
+          "firstName": "test1",
+          "lastName": "test1",
+          "email": "test@test.com"
+        },
+        "createdAt": "2022-01-03T22:43:52.014Z"
+      },
+      "intendedFor": {
+        "id": 8,
+        "firstName": "test1",
+        "lastName": "test1",
+        "email": "test@test.com"
+      },
+      "createdAt": "2022-01-03T22:43:52.090Z",
+      "checked": true,
+      "id": 5,
+      "checkedAt": "2022-01-03T22:44:01.054Z"
+    },
+    {
+      "text": "An answer for your question \"Will it rain??\" was posted.",
+      "question": {
+        "text": "Will it rain??",
+        "createdBy": {
+          "id": 8,
+          "firstName": "test1",
+          "lastName": "test1",
+          "email": "test@test.com"
+        },
+        "createdAt": "2022-01-02T17:08:51.198Z",
+        "answers": [
+          {
+            "text": "Maybe yes, maybe not.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T20:51:52.592Z",
+            "id": 16
+          },
+          {
+            "text": "Check the weather forecast.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T20:55:00.728Z",
+            "id": 17
+          },
+          {
+            "text": "Who knows.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T20:55:46.577Z",
+            "id": 18
+          },
+          {
+            "text": "Yes, it will.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T20:58:14.161Z",
+            "id": 19
+          },
+          {
+            "text": "It will.",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T22:17:41.136Z",
+            "id": 20
+          },
+          {
+            "text": "New answer",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T22:28:59.727Z",
+            "id": 21
+          },
+          {
+            "text": "Newer answer",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T22:43:52.014Z",
+            "id": 22
+          },
+          {
+            "text": "Newest answer",
+            "createdBy": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            },
+            "createdAt": "2022-01-03T22:45:02.575Z",
+            "id": 23
+          }
+        ],
+        "id": 3,
+        "ratings": [
+          {
+            "upVote": true,
+            "downVote": false,
+            "user": {
+              "id": 8,
+              "firstName": "test1",
+              "lastName": "test1",
+              "email": "test@test.com"
+            }
+          }
+        ],
+        "modifiedAt": "2022-01-03T10:44:37.531Z",
+        "totalRating": 1
+      },
+      "answer": {
+        "text": "Newest answer",
+        "createdBy": {
+          "id": 8,
+          "firstName": "test1",
+          "lastName": "test1",
+          "email": "test@test.com"
+        },
+        "createdAt": "2022-01-03T22:45:02.575Z"
+      },
+      "intendedFor": {
+        "id": 8,
+        "firstName": "test1",
+        "lastName": "test1",
+        "email": "test@test.com"
+      },
+      "createdAt": "2022-01-03T22:45:02.955Z",
+      "checked": true,
+      "id": 6,
+      "checkedAt": "2022-01-03T22:45:57.464Z"
     }
   ]
 }

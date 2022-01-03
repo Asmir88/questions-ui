@@ -23,6 +23,7 @@ export const markNotificationAsCheckedAction = (data: any) => {
 
 export const markNotificationAsCheckedSuccessAction = (data: any) => {
     return {
-        type: types.MARK_NOTIFICATION_AS_CHECKED_SUCCESS
+        type: types.MARK_NOTIFICATION_AS_CHECKED_SUCCESS,
+        value: data
     }
 };
