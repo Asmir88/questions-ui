@@ -77,6 +77,7 @@ code {
   font-size: 12px;
 }
 
+.check-notification,
 .toolbar-actions span {
   margin-right: 5px;
 }
@@ -111,6 +112,19 @@ code {
 .notification-label,
 .load-more-label {
   margin-right: 5px;
+}
+
+.notification-wrapper {
+  word-break: inherit;
+  white-space: initial;
+
+  .question {
+    text-overflow: ellipsis;
+    width: 300px;
+    white-space: nowrap;
+    float: left;
+    overflow: hidden;
+  }
 }
 
 @import "node_modules/bootstrap/scss/bootstrap";

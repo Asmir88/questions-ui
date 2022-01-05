@@ -53,7 +53,7 @@ class UsersWithMostAnswersPage extends Component<UsersWithMostAnswersProps> {
                     {usersWithMostAnswers.length === 0 && <tr><td colSpan={4}>No entries found</td></tr>}
                     </tbody>
                 </Table>
-                <LoadMoreButton anyUsersDataLeft={anyUsersDataLeft} loadMore={this.loadMoreUsersWithMostAnswers}/>
+                <LoadMoreButton loadMore={this.loadMoreUsersWithMostAnswers}/>
             </div>
         );
     }

@@ -2,7 +2,7 @@ import React, { Component, Dispatch } from 'react';
 import { connect } from 'react-redux';
 import {
     createQuestionAction,
-    getMyQuestionsAction,
+    getMyQuestionsAction, initializeMyQuestionsAction,
     updateQuestionAction
 } from "../redux/actions/question-actions";
 import { Question } from "../common/models/question";
@@ -14,13 +14,13 @@ import {amountToLoad} from "../configuration/configuration";
 interface MyQuestionsPageProps {
     user: User,
     questions: Question[];
+    initializeMyQuestions: (data: any) => void;
     getMyQuestions: (data: any) => void;
     createQuestion: (question: Question) => void;
     updateQuestion: (question: Question) => void;
     createAnswer: (payload: any) => void;
     updateAnswer: (payload: any) => void;
-    amountLoaded: number,
-    anyQuestionsLeft: boolean,
+    amountLoaded: number
 }
 
 interface MyQuestionsPageState {
@@ -42,7 +42,14 @@ class MyQuestionsPage extends Component<MyQuestionsPageProps, MyQuestionsPageSta
 
 
     componentDidMount() {
-        this.loadMoreQuestions();
+        const { initializeMyQuestions, user } = this.props;
+        let userId = user?.id;
+        if (!userId) {
+            const localUser = JSON.parse(localStorage.getItem("user")!);
+            userId = localUser.id;
+        }
+
+        initializeMyQuestions({ startIndex: 0, amount: amountToLoad, userId });
     }
 
     loadMoreQuestions() {
@@ -84,7 +91,7 @@ class MyQuestionsPage extends Component<MyQuestionsPageProps, MyQuestionsPageSta
     }
 
     render() {
-        const { questions, user, anyQuestionsLeft } = this.props;
+        const { questions } = this.props;
 
         return (
             <div className="main-container">
@@ -92,21 +99,7 @@ class MyQuestionsPage extends Component<MyQuestionsPageProps, MyQuestionsPageSta
                     questions={questions}
                     editable={true}
                     loadMoreQuestions={this.loadMoreQuestions}
-                    anyDataLeftToLoad={anyQuestionsLeft}
                 />
-                {user && <div className="question-form">
-                    <form onSubmit={this.createQuestion}>
-                        <div className="form-group">
-                            <textarea name="question" className="form-control"placeholder="Ask question"
-                                      onChange={this.handleChange}
-                            />
-                        </div>
-                        <div className="align-right">
-                            <button style={{marginTop: "10px"}} className="btn btn-sm btn-primary"
-                                    disabled={this.state.isDisabled} >Ask question</button>
-                        </div>
-                    </form>
-                </div>}
             </div>
         );
     }
@@ -121,6 +114,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     return {
+        initializeMyQuestions: (data: any) => dispatch(initializeMyQuestionsAction(data)),
         getMyQuestions: (data: any) => dispatch(getMyQuestionsAction(data)),
         createQuestion: (question: Question) =>  dispatch(createQuestionAction(question)),
         updateQuestion: (question: Question) =>  dispatch(updateQuestionAction(question)),

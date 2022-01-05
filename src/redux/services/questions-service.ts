@@ -1,3 +1,5 @@
+import {Question} from "../../common/models/question";
+
 export class QuestionsService {
     public static getAll(query: string = "") {
         const QUESTIONS_API_ENDPOINT = `http://localhost:4000/questions${query}`;
@@ -32,8 +34,9 @@ export class QuestionsService {
                 createdBy: question.createdBy,
                 createdAt: question.createdAt,
                 rating: undefined,
+                totalRating: 0,
                 answers: []
-            })
+            } as unknown as Question)
         };
 
         return fetch(QUESTIONS_API_ENDPOINT, parameters)

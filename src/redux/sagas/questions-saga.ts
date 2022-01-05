@@ -11,7 +11,10 @@ import {
     getLatestQuestionsSuccessAction,
     getMyQuestionsSuccessAction,
     getQuestionsErrorAction,
-    getQuestionSuccessAction,
+    getQuestionsSuccessAction,
+    initializeHotQuestionsSuccessAction,
+    initializeLatestQuestionsSuccessAction,
+    initializeMyQuestionsSuccessAction,
     updateQuestionErrorAction,
     updateQuestionSuccessAction
 } from "../actions/question-actions";
@@ -19,18 +22,40 @@ import {
 export function* getQuestionsSaga() {
     try {
         const response: HttpResponse = yield call(QuestionsService.getAll);
-        yield put(getQuestionSuccessAction(response));
+        yield put(getQuestionsSuccessAction(response));
     } catch(error) {
         yield put({ type: types.GET_QUESTIONS_ERROR, error });
+    }
+}
+
+export function* initializeLatestQuestionsSaga(payload: any) {
+    try {
+        const { startIndex, amount } = payload.value;
+        const query = `?_sort=createdAt&_order=desc&_start=${startIndex}&_limit=${amount}`;
+        const response: HttpResponse = yield call(QuestionsService.getAll, query);
+        yield put(initializeLatestQuestionsSuccessAction(response));
+    } catch(error) {
+        yield put(getQuestionsErrorAction(error));
     }
 }
 
 export function* getLatestQuestionsSaga(payload: any) {
     try {
         const { startIndex, amount } = payload.value;
-        const query = `?_sort=createdAt&_order=desc&_start=${startIndex}&_limit=${amount}`
+        const query = `?_sort=createdAt&_order=desc&_start=${startIndex}&_limit=${amount}`;
         const response: HttpResponse = yield call(QuestionsService.getAll, query);
         yield put(getLatestQuestionsSuccessAction(response));
+    } catch(error) {
+        yield put(getQuestionsErrorAction(error));
+    }
+}
+
+export function* initializeHotQuestionsSaga(payload: any) {
+    try {
+        const { startIndex, amount } = payload.value;
+        const query = `?_sort=totalRating&_order=desc&_start=${startIndex}&_limit=${amount}`;
+        const response: HttpResponse = yield call(QuestionsService.getAll, query);
+        yield put(initializeHotQuestionsSuccessAction(response));
     } catch(error) {
         yield put(getQuestionsErrorAction(error));
     }
@@ -39,9 +64,20 @@ export function* getLatestQuestionsSaga(payload: any) {
 export function* getHotQuestionsSaga(payload: any) {
     try {
         const { startIndex, amount } = payload.value;
-        const query = `?_sort=totalRating&_order=desc&_start=${startIndex}&_limit=${amount}`;
+        const query = `?_sort=totalRating&_order=desc&_start=${0}&_limit=${amount}`;
         const response: HttpResponse = yield call(QuestionsService.getAll, query);
         yield put(getHotQuestionsSuccessAction(response));
+    } catch(error) {
+        yield put(getQuestionsErrorAction(error));
+    }
+}
+
+export function* initializeMyQuestionsSaga(payload: any) {
+    try {
+        const { startIndex, amount, userId } = payload.value;
+        const query = `?createdBy.id=${userId}&_sort=createdAt&_order=desc&_start=${startIndex}&_limit=${amount}`;
+        const response: HttpResponse = yield call(QuestionsService.getAll, query);
+        yield put(initializeMyQuestionsSuccessAction(response));
     } catch(error) {
         yield put(getQuestionsErrorAction(error));
     }
@@ -50,7 +86,7 @@ export function* getHotQuestionsSaga(payload: any) {
 export function* getMyQuestionsSaga(payload: any) {
     try {
         const { startIndex, amount, userId } = payload.value;
-        const query = `?createdBy.id=${userId}&_sort=createdAt&_order=desc&_start=${startIndex}&_limit=${amount}`
+        const query = `?createdBy.id=${userId}&_sort=createdAt&_order=desc&_start=${startIndex}&_limit=${amount}`;
         const response: HttpResponse = yield call(QuestionsService.getAll, query);
         yield put(getMyQuestionsSuccessAction(response));
     } catch(error) {

@@ -5,7 +5,7 @@ import {
     createQuestionSaga,
     deleteQuestionSaga, getHotQuestionsSaga,
     getLatestQuestionsSaga, getMyQuestionsSaga,
-    getQuestionsSaga,
+    getQuestionsSaga, initializeHotQuestionsSaga, initializeLatestQuestionsSaga, initializeMyQuestionsSaga,
     updateQuestionSaga
 } from "./questions-saga";
 import {createAnswerSaga, deleteAnswerSaga, updateAnswerSaga} from "./anwsers-saga";
@@ -20,8 +20,11 @@ export default function* watchUserAuthentication(): Generator {
 
     yield takeLatest(types.GET_QUESTIONS, getQuestionsSaga);
     yield takeLatest(types.GET_LATEST_QUESTIONS, getLatestQuestionsSaga);
+    yield takeLatest(types.INITIALIZE_LATEST_QUESTIONS, initializeLatestQuestionsSaga);
     yield takeLatest(types.GET_HOT_QUESTIONS, getHotQuestionsSaga);
+    yield takeLatest(types.INITIALIZE_HOT_QUESTIONS, initializeHotQuestionsSaga);
     yield takeLatest(types.GET_MY_QUESTIONS, getMyQuestionsSaga);
+    yield takeLatest(types.INITIALIZE_MY_QUESTIONS, initializeMyQuestionsSaga);
     yield takeLatest(types.CREATE_QUESTION, createQuestionSaga);
     yield takeLatest(types.UPDATE_QUESTION, updateQuestionSaga);
     yield takeLatest(types.DELETE_QUESTION, deleteQuestionSaga);

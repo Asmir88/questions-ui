@@ -3,7 +3,11 @@ import {Accordion} from "react-bootstrap";
 import {User} from "../common/models/user";
 import {Question} from "../common/models/question";
 import {connect} from "react-redux";
-import {getHotQuestionsAction, getLatestQuestionsAction} from "../redux/actions/question-actions";
+import {
+    getHotQuestionsAction,
+    getLatestQuestionsAction, initializeHotQuestionsAction,
+    initializeLatestQuestionsAction
+} from "../redux/actions/question-actions";
 import QuestionsList from "../common/components/QuestionsList";
 import {amountToLoad} from "../configuration/configuration";
 import UsersWithMostAnswersPage from "./UsersWithMostAnswersPage";
@@ -12,15 +16,14 @@ interface HomePageProps {
     user: User,
     latestQuestions: Question[];
     latestQAmountLoaded: number,
-    anyLatestQuestionsLeft: boolean,
     hotQuestions: Question[];
     hotQAmountLoaded: number,
-    anyHotQuestionsLeft: boolean,
     usersAmountLoaded: number,
-    anyUsersDataLeft: boolean,
     getLatestQuestions: (data: any) => void;
     getHotQuestions: (data: any) => void;
     getUsersWithMostAnswers: (data: any) => void;
+    initializeLatestQuestions: (data: any) => void;
+    initializeHotQuestions: (data: any) => void;
 }
 
 class HomePage extends Component<HomePageProps> {
@@ -31,8 +34,9 @@ class HomePage extends Component<HomePageProps> {
     }
 
     componentDidMount() {
-        this.loadMoreLatestQuestions();
-        this.loadMoreHotQuestions();
+        const { initializeHotQuestions, initializeLatestQuestions } = this.props;
+        initializeHotQuestions({ startIndex: 0, amount: amountToLoad });
+        initializeLatestQuestions({ startIndex: 0, amount: amountToLoad });
     }
 
     loadMoreLatestQuestions() {
@@ -46,7 +50,7 @@ class HomePage extends Component<HomePageProps> {
     }
 
     render() {
-        const { latestQuestions, anyLatestQuestionsLeft, hotQuestions, anyHotQuestionsLeft } = this.props;
+        const { latestQuestions, hotQuestions } = this.props;
 
         return (
             <div className="main-container">
@@ -58,11 +62,11 @@ class HomePage extends Component<HomePageProps> {
                             <QuestionsList questions={latestQuestions}
                                            editable={false}
                                            loadMoreQuestions={this.loadMoreLatestQuestions}
-                                           anyDataLeftToLoad={anyLatestQuestionsLeft} />
+                            />
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="1">
-                        <Accordion.Header>Users with most replies</Accordion.Header>
+                        <Accordion.Header>Users with most answers</Accordion.Header>
                         <Accordion.Body>
                             <UsersWithMostAnswersPage />
                         </Accordion.Body>
@@ -73,7 +77,7 @@ class HomePage extends Component<HomePageProps> {
                             <QuestionsList questions={hotQuestions}
                                            editable={false}
                                            loadMoreQuestions={this.loadMoreHotQuestions}
-                                           anyDataLeftToLoad={anyHotQuestionsLeft} />
+                            />
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
@@ -97,6 +101,8 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     return {
+        initializeLatestQuestions: (data: any) => dispatch(initializeLatestQuestionsAction(data)),
+        initializeHotQuestions: (data: any) => dispatch(initializeHotQuestionsAction(data)),
         getLatestQuestions: (data: any) => dispatch(getLatestQuestionsAction(data)),
         getHotQuestions: (data: any) => dispatch(getHotQuestionsAction(data)),
         getUsersWithMostAnswers: (data: any) => dispatch(getHotQuestionsAction(data))

@@ -21,20 +21,21 @@ export class NotificationsService {
     }
 
     static create(data: any) {
+        const body = {
+            text: `An answer for your question: \n "${data.question.text.length > 10 ? (data.question.text.substring(0, 10) + "...") : data.question.text}" \n was posted.`,
+            question: data.question,
+            answer: data.answer,
+            intendedFor: data.question.createdBy,
+            createdAt: new Date(),
+            checked: false,
+            checkedAt: undefined
+        };
         const parameters = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                text: `An answer for your question "${data.question.text}" was posted.`,
-                question: data.question,
-                answer: data.answer,
-                intendedFor: data.question.createdBy,
-                createdAt: new Date(),
-                checked: false,
-                checkedAt: undefined
-            })
+            body: JSON.stringify(body)
         };
 
         return fetch(NotificationsService.NOTIFICATIONS_API_ENDPOINT, parameters)

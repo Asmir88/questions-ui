@@ -12,10 +12,7 @@ interface QuestionsState {
     usersWithMostAnswers: User[],
     myQAmountLoaded: number,
     latestQAmountLoaded: number,
-    hotQAmountLoaded: number,
-    anyMyQuestionsLeft: boolean,
-    anyLatestQuestionsLeft: boolean
-    anyHotQuestionsLeft: boolean
+    hotQAmountLoaded: number
 }
 
 const initialState = {
@@ -26,34 +23,45 @@ const initialState = {
     usersWithMostAnswers: [],
     myQAmountLoaded: 0,
     latestQAmountLoaded: 0,
-    hotQAmountLoaded: 0,
-    anyMyQuestionsLeft: true,
-    anyLatestQuestionsLeft: true,
-    anyHotQuestionsLeft: true
+    hotQAmountLoaded: 0
 } as QuestionsState;
 
 export default function QuestionsReducer(state: QuestionsState = initialState, action: Action) {
     const value = action.value;
-    let anyDataLeftToLoad;
+
+    function updateQuestionsList(questionsList: Question[], updatedQuestion: Question) {
+        const questions = [...questionsList] as Question[];
+        const index = questions.findIndex(question => question.id === updatedQuestion.id);
+        questions[index] = updatedQuestion;
+        return questions;
+    }
+
     switch(action.type) {
         case types.GET_QUESTIONS_SUCCESS:
             return {...state, allQuestions: value};
+        case types.INITIALIZE_LATEST_QUESTIONS_SUCCESS:
+            return {...state, latestQuestions: value, latestQAmountLoaded: amountToLoad > value.length ? value.length : amountToLoad};
+        case types.INITIALIZE_HOT_QUESTIONS_SUCCESS:
+            return {...state, hotQuestions: value, hotQAmountLoaded: amountToLoad > value.length ? value.length : amountToLoad};
+        case types.INITIALIZE_MY_QUESTIONS_SUCCESS:
+            return {...state, myQuestions: value, myQAmountLoaded: amountToLoad > value.length ? value.length : amountToLoad};
         case types.GET_MY_QUESTIONS_SUCCESS:
-            anyDataLeftToLoad = value.length > 0 && value.length === amountToLoad;
-            return {...state, myQuestions: [...state.myQuestions].concat(value), myQAmountLoaded: state.myQAmountLoaded + amountToLoad, anyMyQuestionsLeft: anyDataLeftToLoad};
+            return {...state, myQuestions: [...state.myQuestions].concat(value), myQAmountLoaded: state.myQAmountLoaded + amountToLoad};
         case types.GET_LATEST_QUESTIONS_SUCCESS:
-            anyDataLeftToLoad = value.length > 0 && value.length === amountToLoad;
-            return {...state, latestQuestions: [...state.latestQuestions].concat(value), latestQAmountLoaded: state.latestQAmountLoaded + amountToLoad, anyLatestQuestionsLeft: anyDataLeftToLoad};
+            return {...state, latestQuestions: [...state.latestQuestions].concat(value), latestQAmountLoaded: state.latestQAmountLoaded + amountToLoad};
         case types.GET_HOT_QUESTIONS_SUCCESS:
-            anyDataLeftToLoad = value.length > 0 && value.length === amountToLoad;
-            return {...state, hotQuestions: [...state.hotQuestions].concat(value), hotQAmountLoaded: state.hotQAmountLoaded + amountToLoad, anyHotQuestionsLeft: anyDataLeftToLoad};
+            return {...state, hotQuestions: value, hotQAmountLoaded: state.hotQAmountLoaded + amountToLoad};
         case types.CREATE_QUESTION_SUCCESS:
             return {...state, allQuestions: state.allQuestions.concat(value)}
         case types.UPDATE_QUESTION_SUCCESS:
-            const questions = [...state.allQuestions] as Question[];
-            const index = questions.findIndex(question => question.id === value.id);
-            questions[index] = value;
-            const newState = {...state, allQuestions: questions};
+            const newState = {
+                ...state,
+                allQuestions: updateQuestionsList([...state.allQuestions], value),
+                latestQuestions: updateQuestionsList([...state.latestQuestions], value),
+                // resorting in case rating changed after loading question
+                hotQuestions: updateQuestionsList([...state.hotQuestions], value).sort((a,b) => a.totalRating > b.totalRating ? -1 : 1),
+                myQuestions: updateQuestionsList([...state.myQuestions], value)
+            };
             return newState;
         case types.DELETE_QUESTION_SUCCESS:
             const updatedQuestions = [...state.allQuestions].filter(question => question.id !== value);

@@ -39,8 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-auth-server": "json-server db.json -m ./node_modules/json-server-auth --port 4000",
-    "start-local-server": "node server.js"
+    "start-auth-server": "json-server db.json -m ./node_modules/json-server-auth --port 4000"
   },
   "eslintConfig": {
     "extends": [

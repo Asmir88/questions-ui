@@ -1,6 +1,5 @@
 import { put, call } from 'redux-saga/effects';
 import * as types from '../actions'
-import { QuestionsService } from "../services/questions-service";
 import {HttpResponse} from "../../common/models/http-response";
 import {
     updateQuestionErrorAction,

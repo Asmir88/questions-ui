@@ -1,6 +1,5 @@
 import * as types from '../actions';
 import {Action} from "../../common/models/action";
-import {amountToLoad} from "../../configuration/configuration";
 import {Notification} from "../../common/models/notification";
 
 interface NotificationsState {

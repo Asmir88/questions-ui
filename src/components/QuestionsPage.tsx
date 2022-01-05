@@ -18,6 +18,7 @@ interface QuestionsPageProps {
 
 interface QuestionsPageState {
     isDisabled: boolean;
+    question: string;
 }
 
 class QuestionsPage extends Component<QuestionsPageProps, QuestionsPageState> {
@@ -25,7 +26,8 @@ class QuestionsPage extends Component<QuestionsPageProps, QuestionsPageState> {
         super(props);
 
         this.state = {
-            isDisabled: true
+            isDisabled: true,
+            question: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -41,6 +43,7 @@ class QuestionsPage extends Component<QuestionsPageProps, QuestionsPageState> {
     handleChange(event:any) {
         this.setState(state => ({
             ...state,
+            question: event.target.value,
             isDisabled: !event.target.value
         }));
     };
@@ -61,6 +64,11 @@ class QuestionsPage extends Component<QuestionsPageProps, QuestionsPageState> {
                 modifiedAt: undefined
             } as unknown as Question;
 
+            this.setState(state => ({
+                ...state,
+                isDisabled: true,
+                question: ""
+            }))
             createQuestion(questionData);
         }
     }
@@ -74,8 +82,8 @@ class QuestionsPage extends Component<QuestionsPageProps, QuestionsPageState> {
                 {user && <div className="question-form">
                     <form onSubmit={this.createQuestion}>
                         <div className="form-group">
-                            <textarea name="question" className="form-control"placeholder="Ask question"
-                                      onChange={this.handleChange}
+                            <textarea name="question" className="form-control" placeholder="Ask question"
+                                      value={this.state.question} onChange={this.handleChange}
                             />
                         </div>
                         <div className="align-right">

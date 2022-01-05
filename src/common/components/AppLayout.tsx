@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import NavbarHeader from "./NavbarHeader";
 import React, { Component } from "react";
 import { User } from "../models/user";

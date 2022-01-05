@@ -6,7 +6,6 @@ import LoadMoreButton from "./LoadMoreButton";
 interface QuestionsListProps {
     questions: Question[];
     editable: boolean;
-    anyDataLeftToLoad?: boolean;
     loadMoreQuestions?: () => void;
 }
 
@@ -26,8 +25,8 @@ const QuestionsList = (props: QuestionsListProps) => {
                         </div>
                     )
                     }
-                    {props.loadMoreQuestions && props.anyDataLeftToLoad &&
-                    <LoadMoreButton anyUsersDataLeft={props.anyDataLeftToLoad} loadMore={props.loadMoreQuestions}/>
+                    {props.loadMoreQuestions &&
+                    <LoadMoreButton loadMore={props.loadMoreQuestions}/>
                     }
                 </div>
             }

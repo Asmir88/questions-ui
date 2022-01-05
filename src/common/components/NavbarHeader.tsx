@@ -24,28 +24,26 @@ class NavbarHeader extends Component<NavbarHeaderProps> {
         const { user } = this.props;
 
         return (
-            <div className="App">
-                <Navbar bg="light" expand="lg">
-                    <Container>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto">
-                                <NavLink className="nav-link" to="/home">Home</NavLink>
-                                <NavLink className="nav-link" to="/questions">Questions</NavLink>
-                                {user && <NavLink className="nav-link" to="/my-questions">My questions</NavLink>}
-                            </Nav>
-                            {!user && <NavLink className="nav-link" to="/login">Log in</NavLink>}
-                            {user && <Notifications />}
-                            {user && <NavDropdown title={
-                                <FontAwesomeIcon icon={["fas", "users"]}/>
-                            } id="basic-nav-dropdown">
-                                <NavLink className="nav-link" to="/profile">Profile ({user?.email})</NavLink>
-                                <NavDropdown.Item onClick={this.logOut}>Sign out</NavDropdown.Item>
-                            </NavDropdown>}
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-            </div>
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <NavLink className="nav-link" to="/home">Home</NavLink>
+                            <NavLink className="nav-link" to="/questions">Questions</NavLink>
+                            {user && <NavLink className="nav-link" to="/my-questions">My questions</NavLink>}
+                        </Nav>
+                        {!user && <NavLink className="nav-link" to="/login">Log in</NavLink>}
+                        {user && <Notifications/>}
+                        {user && <NavDropdown title={
+                            <FontAwesomeIcon icon={["fas", "users"]}/>
+                        } id="basic-nav-dropdown">
+                            <NavLink className="nav-link" to="/profile">Profile ({user?.email})</NavLink>
+                            <NavDropdown.Item onClick={this.logOut}>Sign out</NavDropdown.Item>
+                        </NavDropdown>}
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
         );
     }
 }

@@ -22,8 +22,10 @@ class Notifications extends Component<NotificationsProps> {
     componentDidMount() {
         this.loadNotifications();
 
-        // refresh notifications every 30 secs
-        setTimeout(() => this.loadNotifications(), 30000);
+        // refresh notifications every 10 secs
+        setInterval(() => {
+            this.loadNotifications();
+        }, 10000);
     }
 
     loadNotifications() {
@@ -41,14 +43,17 @@ class Notifications extends Component<NotificationsProps> {
         return (
             <div>
                 <NavDropdown title={
-                    <FontAwesomeIcon icon={["fas", "comments"]}/>
+                    <span>
+                        <FontAwesomeIcon icon={["fas", "comments"]}/>
+                        {notifications.length > 0 && <span className="notifications-amount">{notifications.length}</span>}
+                    </span>
                 } id="basic-nav-dropdown">
                     {
                         notifications.length > 0 && notifications && notifications.map(notification =>
                             <NavDropdown.Item key={notification.id}>
-                                <span className="notification-label">{notification.text}</span>
-                                <span onClick={() => this.markAsChecked(notification)}><FontAwesomeIcon
-                                    icon={["fas", "times"]}/></span>
+                                <div className="notification-wrapper" onClick={() => this.markAsChecked(notification)}>
+                                    <span className="notification-label">{notification.text}</span>
+                                </div>
                             </NavDropdown.Item>
                         )}
                     {

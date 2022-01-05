@@ -1,1 +1,1 @@
-export const amountToLoad = 1;
+export const amountToLoad = 20;

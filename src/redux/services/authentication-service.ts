@@ -2,9 +2,8 @@ import { Request } from "../../common/models/request";
 import {isSuccess} from "../../common/utils/utils";
 
 export class AuthenticationService {
-    private static REGISTER_API_ENDPOINT = 'http://localhost:4000/register';
-
     public static register(request: Request) {
+        const REGISTER_API_ENDPOINT = 'http://localhost:4000/register';
         const parameters = {
             method: 'POST',
             headers: {
@@ -13,9 +12,9 @@ export class AuthenticationService {
             body: JSON.stringify(request.value)
         };
 
-        return fetch(this.REGISTER_API_ENDPOINT, parameters)
+        return fetch(REGISTER_API_ENDPOINT, parameters)
             .then(async response => {
-                return await this.processResponse(response);
+                return await AuthenticationService.processResponse(response);
             });
     }
 
