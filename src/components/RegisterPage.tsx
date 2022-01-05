@@ -84,6 +84,7 @@ class RegisterPage extends Component<RegisterPageProps, RegisterPageState> {
                         <label>Email</label>
                         <input type="email" name="email" className="form-control" />
                         { errors?.email?.isRequired && <div className="error-message">{errors?.email?.isRequired.message}</div> }
+                        { errors?.email?.validEmail && <div className="error-message">{errors?.email?.validEmail.message}</div> }
                     </div>
                     <div className="form-group">
                         <label>Password</label>
