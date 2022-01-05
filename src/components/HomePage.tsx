@@ -46,7 +46,7 @@ class HomePage extends Component<HomePageProps> {
 
     loadMoreHotQuestions() {
         const { getHotQuestions, hotQAmountLoaded } = this.props;
-        getHotQuestions({ startIndex: hotQAmountLoaded, amount: amountToLoad });
+        getHotQuestions({ startIndex: hotQAmountLoaded, amount: hotQAmountLoaded + amountToLoad });
     }
 
     render() {

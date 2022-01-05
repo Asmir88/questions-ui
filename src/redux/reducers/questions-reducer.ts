@@ -50,7 +50,7 @@ export default function QuestionsReducer(state: QuestionsState = initialState, a
         case types.GET_LATEST_QUESTIONS_SUCCESS:
             return {...state, latestQuestions: [...state.latestQuestions].concat(value), latestQAmountLoaded: state.latestQAmountLoaded + amountToLoad};
         case types.GET_HOT_QUESTIONS_SUCCESS:
-            return {...state, hotQuestions: value, hotQAmountLoaded: state.hotQAmountLoaded + amountToLoad};
+            return {...state, hotQuestions: value, hotQAmountLoaded: value.length};
         case types.CREATE_QUESTION_SUCCESS:
             return {...state, allQuestions: state.allQuestions.concat(value)}
         case types.UPDATE_QUESTION_SUCCESS:
@@ -58,7 +58,7 @@ export default function QuestionsReducer(state: QuestionsState = initialState, a
                 ...state,
                 allQuestions: updateQuestionsList([...state.allQuestions], value),
                 latestQuestions: updateQuestionsList([...state.latestQuestions], value),
-                // resorting in case rating changed after loading question
+                // resorting in case rating changed after loading questions
                 hotQuestions: updateQuestionsList([...state.hotQuestions], value).sort((a,b) => a.totalRating > b.totalRating ? -1 : 1),
                 myQuestions: updateQuestionsList([...state.myQuestions], value)
             };
